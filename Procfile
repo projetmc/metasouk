@@ -1,1 +1,1 @@
-web: gunicorn nft.wsgi --log-file -
+web: gunicorn nft.wsgi:application
