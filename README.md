@@ -48,6 +48,7 @@ voici les etapes afin de l'executer localement :
 
 1.Prérequis:
 Python 3.8
+django
 pip
 Git
 Virtualenv (optionnel mais recommandé)
