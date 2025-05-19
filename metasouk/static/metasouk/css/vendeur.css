@@ -1,0 +1,167 @@
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.left-side {
+  width: 200px;
+}
+
+.product-action-bar button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  background-color: #f99c00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.right-side {
+  flex-grow: 1;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-form input,
+.add-product-form select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  background-color: #f99c00;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #f2f2f2;
+}
+
+.actions button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+/* ======= Modal Overlay ======= */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  overflow-y: auto; /* Permet le scroll si la modal est trop grande */
+  padding: 20px; /* Pour que le contenu ne touche pas les bords */
+}
+
+@media (max-height: 500px) {
+    .modal-dialog {
+        max-height: 80vh;
+    }
+}
+
+.modal-dialog {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-height: 90vh; /* Limite la hauteur de la modal */
+  overflow-y: auto; /* Scroll interne si le contenu dépasse */
+}
+
+/* ======= Modal Header ======= */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* ======= Close Button ======= */
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  color: #000;
+}
+
+/* ======= Modal Form ======= */
+.modal-body form input,
+.modal-body form select,
+.modal-body form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.modal-body form button {
+  background-color: #f99c00;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-body form button:hover {
+  background-color: #e68a00;
+}

@@ -1,0 +1,4 @@
+admin_user = (
+    username="admin",
+    password=make_password("admin123")  
+)

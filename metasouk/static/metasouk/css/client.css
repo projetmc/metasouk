@@ -1,0 +1,274 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* Left side takes 1 part, right side 2 parts */
+  gap: 20px;
+  padding: 20px;
+  background-color: #404040;
+
+}
+
+.left-side {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.right-side-wrapper {
+  display: flex;
+  justify-content: center;
+  /* Centrer le contenu horizontalement */
+  align-items: flex-start;
+  /* Aligner en haut */
+}
+
+.right-side {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  /* Tu peux ajuster à 90% si tu veux qu’il soit un peu plus petit */
+  max-width: 900px;
+  /* Limite de largeur optionnelle */
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.purchase-history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.purchase-history th,
+.purchase-history td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.purchase-history th {
+  background-color: #f99c00;
+}
+
+.purchase-history td {
+  background-color: #fafafa;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-buttons .button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #f99c00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-buttons .button:hover {
+  background-color: #e68a00;
+}
+
+.separator {
+  border: none;
+  height: 3px;
+  background-color: #f99c00;
+  margin: 5px 0;
+  border-radius: 2px;
+}
+
+.button.back {
+  background-color: #404040;
+  color: white;
+  /* Pour que le texte reste visible */
+}
+
+
+body {
+  background-color: #404040;
+  /* Fond sombre */
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+#modifyBtn {
+  background-color: #f99c00;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px;
+}
+
+#modifyBtn:hover {
+  background-color: #e68900;
+}
+
+#modifSection {
+  display: none;
+  background-color: #333333;
+  /* Fond plus clair pour la section */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  transition: opacity 0.5s ease;
+}
+
+.card {
+  background-color: #444444;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h5 {
+  color: #f99c00;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  color: #f99c00;
+  font-weight: bold;
+}
+
+.form-control {
+  background-color: #555555;
+  color: #fff;
+  border: 1px solid #f99c00;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-control::placeholder {
+  color: #f4f4f4;
+}
+
+.form-control:focus {
+  border-color: #f99c00;
+  box-shadow: 0 0 5px #f99c00;
+}
+
+button[type="submit"] {
+  background-color: #f99c00;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  margin: 3px;
+}
+
+button[type="submit"]:hover {
+  background-color: #e68900;
+}
+
+.slide-section {
+  transition: opacity 0.5s ease;
+}
+
+#modifSection {
+  opacity: 0;
+}
+
+#modifSection.show {
+  opacity: 1;
+}
+
+/* Section de modification */
+.modif-section {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  color: white;
+}
+
+.modif-section h3 {
+  color: #f99c00;
+  margin-bottom: 20px;
+}
+
+.modif-section label {
+  display: block;
+  margin-bottom: 8px;
+  color: #f99c00;
+}
+
+.modif-section input[type="text"],
+.modif-section input[type="email"],
+.modif-section input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #f99c00;
+  border-radius: 4px;
+  background-color: #555555;
+  color: white;
+}
+
+.modif-section input::placeholder {
+  color: #f4f4f4;
+}
+
+.modif-section input:focus {
+  border-color: #f99c00;
+  box-shadow: 0 0 5px #f99c00;
+}
+
+.modif-section .button {
+  background-color: #f99c00;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.modif-section .button:hover {
+  background-color: #e68900;
+}
+
+select.form-control {
+  background-color: #555555;
+  color: #fff;
+  border: 1px solid #f99c00;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+select.form-control:focus {
+  border-color: #f99c00;
+  box-shadow: 0 0 5px #f99c00;
+}

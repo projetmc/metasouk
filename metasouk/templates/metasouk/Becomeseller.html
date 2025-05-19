@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="fr">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="Subject Line, Attachment Guide, Email Etiquette: Dos and Don&amp;apos;ts">
+  <meta name="description" content="">
+  <title>Becomeseller</title>
+  <link rel="stylesheet" href="{% static 'metasouk/css/site.css' %}" media="screen">
+  <link rel="stylesheet" href="{% static 'metasouk/css/Becomeseller.css' %}" media="screen">
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/jquery.js' %}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/site.js' %}" defer=""></script>
+  <meta name="referrer" content="origin">
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Alata:400">
+</head>
+
+<body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="fr">
+  {% include "metasouk/includes/header.html" %}
+  <section
+    class="u-align-center u-clearfix u-container-align-center u-container-align-center-lg u-container-align-center-xl u-grey-75 u-section-1"
+    id="carousel_addc">
+    <div class="u-clearfix u-sheet u-valign-middle-lg u-sheet-1">
+      <h2 class="u-text u-text-1" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="0"
+        data-animation-direction="X">Become Seller<br>
+      </h2>
+      <h2 class="u-text u-text-2" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="0"
+        data-animation-direction="X"> META SOUQ</h2>
+      <div
+        class="u-align-center u-black u-container-align-center u-container-align-center-lg u-container-align-center-md u-container-align-center-xl u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-opacity u-opacity-5 u-shape-rectangle u-group-1"
+        id="sizzle-1746446431927" data-animation-name="lightSpeedIn" data-animation-duration="1000"
+        data-animation-delay="0" data-animation-direction="">
+        <div class="u-container-layout u-valign-middle-lg u-container-layout-1">
+          <h4 class="u-custom-font u-font-montserrat u-text u-text-default-lg u-text-default-xl u-text-3">Sell , Buy
+            without hasatation</h4>
+          <h6 class="u-custom-font u-font-montserrat u-text u-text-default u-text-4">
+            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-3 u-btn-1"
+              href="{% url 'client' %}" data-page-id="81184317" title="client">Check statue</a>
+          </h6>
+          <h6 class="u-custom-font u-font-montserrat u-text u-text-default u-text-5">Answer will be provaided in 3
+            days&nbsp; </h6>
+          <div class="u-form u-form-1">
+            <form action="" class="u-clearfix u-form-spacing-28 u-form-vertical u-inner-form" name="form"
+              style="padding: 0px;" method="POST" id="become-seller-form">
+              {% csrf_token %}
+              <div class="u-form-email u-form-group u-form-partition-factor-2">
+                <label for="email-c6a3" class="u-label">Email</label>
+                <input type="email" placeholder="Enter a valid email address" id="email-c6a3" name="email"
+                  class="u-border-2 u-border-custom-color-3 u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-none"
+                  required="">
+              </div>
+              <div class="u-form-group u-form-name u-form-partition-factor-2">
+                <label for="name-c6a3" class="u-label">Name</label>
+                <input type="text" placeholder="Enter your Name" id="name-c6a3" name="name"
+                  class="u-border-2 u-border-custom-color-3 u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-none"
+                  required="">
+              </div>
+              <div class="u-align-center u-form-group u-form-submit">
+                <button type="submit"
+                  class="u-active-palette-5-dark-1 u-border-none u-btn u-button-style u-custom-font u-font-raleway u-hover-custom-color-3 u-palette-4-base u-text-active-black u-text-hover-black u-text-white u-btn-2"
+                  data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
+                  Become seller
+                </button>
+                <script>
+                  document.getElementById("become-seller-form").addEventListener("submit", function (event) {
+                    alert("Votre demande a été envoyée. Vous recevrez un email de confirmation.");
+                  });
+                </script>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <img class="u-hidden-md u-hidden-sm u-hidden-xs u-image u-image-default u-image-1"
+        src="{% static 'metasouk/images/2598f9c09ec05737c5af40751fa28aef1.jpg' %}" alt="" data-image-width="1446"
+        data-image-height="1920" data-animation-name="customAnimationIn" data-animation-duration="1000"
+        data-animation-delay="0">
+    </div>
+    <style data-mode="XXL">
+      @media (max-width: 0px) {
+        .u-section-1 {
+          background-image: none;
+        }
+
+        .u-section-1 .u-sheet-1 {
+          min-height: 906px;
+        }
+
+        .u-section-1 .u-text-1 {
+          margin-top: 60px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 0;
+        }
+
+        .u-section-1 .u-group-1 {
+          width: 800px;
+          min-height: 673px;
+          height: auto;
+          margin-top: 40px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 60px;
+        }
+
+        .u-section-1 .u-container-layout-1 {
+          padding-top: 30px;
+          padding-bottom: 30px;
+          padding-left: 30px;
+          padding-right: 30px;
+        }
+
+        .u-section-1 .u-text-3 {
+          font-size: 1.875rem;
+          font-weight: 700;
+          margin-top: 0;
+          margin-bottom: 0;
+          margin-left: 56px;
+          margin-right: 56px;
+        }
+
+        .u-section-1 .u-text-5 {
+          font-weight: 400;
+          margin-top: 24px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 0;
+        }
+
+        .u-section-1 .u-form-1 {
+          height: 453px;
+          width: 670px;
+          margin-top: 24px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 0;
+        }
+
+        .u-section-1 .u-form-group-3 {
+          margin-left: 0;
+        }
+
+        .u-block-2a68-22 {
+          margin-left: 0;
+        }
+
+        .u-section-1 .u-btn-2 {
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 1rem;
+          letter-spacing: 3px;
+          background-image: none;
+          --animation-custom_in-translate_x: 300px;
+          --animation-custom_in-translate_y: 0px;
+          padding-top: 16px;
+          padding-right: 56px;
+          padding-bottom: 17px;
+          padding-left: 55px;
+        }
+      }
+    </style>
+  </section>
+
+
+
+  {% include "metasouk/includes/footer.html" %}
+</body>
+
+</html>

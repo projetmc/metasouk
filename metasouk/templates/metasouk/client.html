@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="fr">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>client</title>
+  <link rel="stylesheet" href="{% static 'metasouk/css/site.css' %}" media="screen">
+  <link rel="stylesheet" href="{% static 'metasouk/css/client.css' %}" media="screen">
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/jquery.js' %}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/site.js' %}" defer=""></script>
+  <script src="{% static 'metasouk/js/client.js' %}"></script>
+  <meta name="referrer" content="origin">
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700|Alata:400">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+</head>
+
+<body data-path-to-root="./" class="u-body u-xl-mode" data-lang="fr">
+  {% include "metasouk/includes/header.html" %}
+
+  <div class="container">
+    <div class="left-side">
+      <h3>My Informations</h3>
+      <form method="POST" id="modification-form">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="username" value="{{ utilisateur.username }}">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email" value="{{ utilisateur.email }}">
+
+        <label for="age">Âge</label>
+        <input type="number" id="age" name="age" placeholder="Entrez votre âge" value="{{ utilisateur.age }}">
+
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" value="{{ utilisateur.statut }}" readonly>
+      </form>
+
+      <div class="action-buttons">
+        <button type="button" class="button" id="modify-info-button">Modify Information</button>
+        <hr class="separator">
+        <a href="{% url 'products' %}"><button class="button">Buy Product</button></a>
+        <hr class="separator">
+        {% if utilisateur.statut == "client" %}
+        <a href="{% url 'Becomeseller' %}"><button class="button">Become Seller</button></a>
+        {% elif utilisateur.statut == "vendeur" %}
+        <a href="{% url 'vendeur' %}"><button class="button">Seller Space</button></a>
+        {% endif %}
+        <hr class="separator">
+        <form action="{% url 'delete_account' %}" method="post"
+          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+          {% csrf_token %}
+          <button type="submit" class="button">Delete Account</button>
+        </form>
+        <hr class="separator">
+        <a href="{% url 'logout' %}"><button class="button back">← SIGN OUT</button></a>
+      </div>
+    </div>
+
+    <div class="right-side-wrapper">
+      <div class="right-side">
+        <h3>Your NFTs</h3>
+
+        <div class="purchase-history">
+          <h4>Purchased Products</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for produit in produits_achetes %}
+              <tr>
+                <td>{{ produit.nom }}</td>
+                <td>${{ produit.prix }}</td>
+                <td>{{ produit.get_categorie_display }}</td>
+                <td>
+                  <img src="{{ produit.image.url }}" alt="{{ produit.nom }}"
+                    style="height: 80px; width: auto; border-radius: 5px;">
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4">No products purchased</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('modify-info-button').addEventListener('click', function () {
+      // Soumettre le formulaire
+      document.getElementById('modification-form').submit();
+    });
+
+  </script>
+  {% include "metasouk/includes/footer.html" %}
+</body>
+
+
+</html>

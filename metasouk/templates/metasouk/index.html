@@ -1,0 +1,507 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="fr">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords"
+    content="Bienvenue sur notre site web, Découvrez notre page d&amp;apos;accueil, Porte d&amp;apos;Entrée, Réception Rapide, Accédez à notre site en ligne, Hall Central, Ce que les gens disent, Zone d&amp;apos;Accueil">
+  <meta name="description" content="">
+  <title>Home</title>
+  <link rel="stylesheet" href="{% static 'metasouk/css/site.css' %}" media="screen">
+  <link rel="stylesheet" href="{% static 'metasouk/css/index.css' %}" media="screen">
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/jquery.js' %}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/site.js' %}" defer=""></script>
+  <meta name="referrer" content="origin">
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=AR+One+Sans:400,500,600,700|Alata:400">
+</head>
+<style>
+  #btnchatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+  }
+
+  #chatbot {
+    padding: 10px 20px;
+    background-color: #f99c00;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  #chatbot:hover {
+    background-color: #292e33;
+    font-weight: bold;
+  }
+
+  .glassch {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 370px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+  }
+
+  .chat-title {
+    background-color: #292e33;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .chat-log {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    scroll-behavior: smooth;
+  }
+
+  .chat-log::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .chat-log::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+
+  .chat-log::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .chat-log .user {
+    align-self: flex-end;
+    background: #f99c00;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px 20px 0 20px;
+    max-width: 80%;
+  }
+
+  .chat-log .bot {
+    align-self: flex-start;
+    background: #292e33;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px 20px 20px 0;
+    max-width: 80%;
+  }
+
+  .input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+  }
+
+  .input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #404040;
+    border-radius: 20px;
+    outline: none;
+    color: #292e33;
+  }
+
+  .input button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #f99c00;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: #f1f1f1;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .suggestions button {
+    flex: 1 0 45%;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #404040;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 480px) {
+    .glassch {
+      width: 95%;
+      right: 2.5%;
+      height: 90vh;
+    }
+  }
+</style>
+
+<body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="fr">
+  {% include "metasouk/includes/header.html" %}
+
+  <!-- Chatboot -->
+  <div class="glassch" id="sidebarch">
+    <div class="chat">
+      <div class="chat-title">Assistante Anaglobine</div>
+      <div class="chat-log" id="chatLog"></div>
+      <div class="input">
+        <input type="text" id="userInput" placeholder="Tapez votre question ici...">
+        <button id="envcht">Envoyer</button>
+      </div>
+      <div class="suggestions">
+        <button onclick="sendQuestion('C’est quoi un NFT ?')">C’est quoi un NFT ?</button>
+        <button onclick="sendQuestion('Comment acheter un NFT ?')">Acheter un NFT</button>
+        <button onclick="sendQuestion('Comment vendre un NFT ?')">Vendre un NFT</button>
+        <button onclick="sendQuestion('Un client peut-il devenir vendeur ?')">Devenir vendeur</button>
+        <button onclick="sendQuestion('Comment vérifier mon statut de vendeur ?')">Statut vendeur</button>
+        <button onclick="sendQuestion('Quels types de NFT vendez-vous ?')">Types de NFT</button>
+        <button onclick="sendQuestion('Quelles sont les catégories de NFT disponibles ?')">Catégories
+          NFT</button>
+        <button onclick="sendQuestion('Comment s’inscrire ?')">S’inscrire</button>
+        <button onclick="sendQuestion('Comment se connecter ?')">Connexion</button>
+        <button onclick="sendQuestion('Comment vous contacter ?')">Contact</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="btnchatbot">
+    <button id="chatbot">Assistante</button>
+  </div>
+
+  <!-- Section principale -->
+  <section class="u-align-center u-clearfix u-container-align-center u-shading u-valign-middle u-section-1"
+    id="sec-cad9">
+    <div class="u-expanded-width u-gallery u-layout-grid u-lightbox u-no-transition u-show-text-none u-gallery-1">
+      <div class="u-gallery-inner u-gallery-inner-1">
+        <div class="u-effect-hover-zoom u-gallery-item">
+          <div class="u-back-slide" data-image-width="1446" data-image-height="1920">
+            <img class="u-back-image u-expanded"
+              src="{% static 'metasouk/images/2598f9c09ec05737c5af40751fa28aef1.jpg' %}">
+          </div>
+          <div class="u-over-slide u-shading u-over-slide-1"></div>
+        </div>
+        <div class="u-effect-hover-zoom u-gallery-item u-gallery-item-2">
+          <div class="u-back-slide" data-image-width="673" data-image-height="1200">
+            <img class="u-back-image u-expanded" src="{% static 'metasouk/images/photo_5809977663924850114_y.jpg' %}">
+          </div>
+          <div class="u-over-slide u-shading u-over-slide-2"></div>
+        </div>
+        <div class="u-effect-hover-zoom u-gallery-item u-gallery-item-3">
+          <div class="u-back-slide" data-image-width="736" data-image-height="1104">
+            <img class="u-back-image u-expanded"
+              src="{% static 'metasouk/images/f97c978cd40164d706841f94c9ee7646.jpg' %}">
+          </div>
+          <div class="u-over-slide u-shading u-over-slide-3"></div>
+        </div>
+        <div class="u-effect-hover-zoom u-gallery-item">
+          <div class="u-back-slide" data-image-width="1446" data-image-height="1920">
+            <img class="u-back-image u-expanded" src="{% static 'metasouk/images/photo_5809977663924850113_y.jpg' %}">
+          </div>
+          <div class="u-over-slide u-shading u-over-slide-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="u-clearfix u-grey-80 u-section-2" id="sec-fe4e">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div
+        class="u-border-3 u-border-custom-color-3 u-expanded-width-xs u-line u-line-horizontal u-opacity u-opacity-20 u-line-1">
+      </div>
+      <img class="u-hidden-sm u-hidden-xs u-image u-image-default u-preserve-proportions u-image-1"
+        src="{% static 'metasouk/images/8821809e23c28fbc2c35795ee4bed294-removebg-preview.png' %}" alt=""
+        data-image-width="500" data-image-height="500" data-animation-name="customAnimationIn"
+        data-animation-duration="4000" data-animation-delay="1000">
+      <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-2"
+        src="{% static 'metasouk/images/SK__1_-removebg-preview.png' %}" alt="" data-image-width="500"
+        data-image-height="500">
+      <h2 class="u-align-center u-text u-text-default-xl u-text-1">META SOUQ </h2>
+      <h2 class="u-align-center u-hidden-md u-text u-text-default u-text-2"> LAB</h2>
+      <h3 class="u-align-center u-text u-text-default u-text-3"> The Future of NFTs at Your Fingertips !</h3>
+      <h3 class="u-align-center u-text u-text-default u-text-4"> buy and sell exclusive NFTs.</h3>
+      <a href="Home.html#sec-b5f5" data-page-id="2594912025"
+        class="u-active-none u-border-hover-grey-75 u-border-none u-btn u-btn-round u-button-style u-gradient u-hover-none u-none u-radius u-text-active-grey-40 u-text-body-alt-color u-text-hover-black u-btn-1"
+        data-animation-name="flash" data-animation-duration="1000" data-animation-delay="0"
+        data-animation-direction="">Explore </a>
+      <a href="{% url 'signup' %}" data-page-id="8129083"
+        class="infinite u-active-none u-border-hover-grey-75 u-border-none u-btn u-btn-round u-button-style u-gradient u-hover-none u-none u-radius u-text-active-grey-40 u-text-body-alt-color u-text-hover-black u-btn-2"
+        data-animation-name="tada" data-animation-duration="2000" data-animation-delay="0" data-animation-direction=""
+        title="SIGN IN">Sign up </a>
+    </div>
+  </section>
+  <!-- A propos -->
+  <section class="u-clearfix u-container-align-center-lg u-container-align-center-xl u-palette-1-dark-3 u-section-3"
+    id="sec-30f4">
+    <div class="u-clearfix u-sheet u-valign-bottom-sm u-sheet-1">
+      <h5 class="u-align-center u-text u-text-default u-text-1">Work with us</h5>
+      <h2 class="u-align-center u-text u-text-default u-text-2">META SOUQ </h2>
+      <div
+        class="u-align-center-sm u-align-center-xs u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-list u-list-1">
+        <div class="u-align-center-md u-align-left-sm u-align-left-xs u-layout-spacing-all u-repeater u-repeater-1">
+          <div
+            class="u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-container-style u-list-item u-repeater-item u-shape-rectangle u-list-item-1">
+            <div
+              class="u-container-layout u-similar-container u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-top-xs u-container-layout-1">
+              <span class="u-align-center u-file-icon u-icon u-text-palette-4-base u-icon-1"><img
+                  src="{% static 'metasouk/images/87932-94027438.png' %}" alt=""></span>
+              <h5 class="u-align-center u-text u-text-3"> Mitigate risks</h5>
+              <p class="u-align-center u-hidden-md u-hidden-sm u-hidden-xs u-text u-text-4"> This platform helps digital
+                artists sell their NFTs and mitigate risks with smart contracts</p>
+            </div>
+          </div>
+          <div
+            class="u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-container-style u-list-item u-repeater-item u-shape-rectangle u-list-item-2">
+            <div
+              class="u-container-layout u-similar-container u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-top-xs u-container-layout-2">
+              <span class="u-align-center u-file-icon u-icon u-text-palette-4-base u-icon-2"><img
+                  src="{% static 'metasouk/images/87932-94027438.png' %}" alt=""></span>
+              <h5 class="u-align-center u-text u-text-5"> Reduce costs</h5>
+              <p class="u-align-center u-hidden-md u-hidden-sm u-hidden-xs u-text u-text-6"> This digital platform helps
+                small businesses grow, reduce costs, and improve operational efficiency&nbsp;</p>
+            </div>
+          </div>
+          <div
+            class="u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-container-style u-list-item u-repeater-item u-shape-rectangle u-list-item-3">
+            <div
+              class="u-container-layout u-similar-container u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-top-xs u-container-layout-3">
+              <span class="u-align-center u-file-icon u-icon u-text-palette-4-base u-icon-3"><img
+                  src="{% static 'metasouk/images/87932-94027438.png' %}" alt=""></span>
+              <h5 class="u-align-center u-text u-text-7"> Scalability</h5>
+              <p class="u-align-center u-hidden-md u-hidden-sm u-hidden-xs u-text u-text-8"> Our scalable platform
+                empowers creators to grow efficiently, reaching global audiences&nbsp;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skrollable u-clearfix u-container-align-center u-image u-parallax u-section-4" id="sec-d692"
+    data-image-width="673" data-image-height="1200" style=" background-repeat: no-repeat; background-size: cover; 
+    background-image: url('{% static 'metasouk/images/c6baa39a4469a738bed75bcc8881283c.jpg' %}');">
+    <div class="u-clearfix u-sheet u-sheet-1"></div>
+  </section>
+
+  <!--Categories -->
+  <section class="u-clearfix u-container-align-center u-palette-1-dark-3 u-section-5" id="sec-b5f5">
+    <div class="u-clearfix u-sheet u-valign-middle-xl u-sheet-1">
+      <h5 class="u-align-center u-text u-text-default u-text-1">Online Market Place</h5>
+      <h2 class="u-align-center u-text u-text-default u-text-2">Store collection&nbsp;</h2>
+      <div class="u-expanded-width u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div
+              class="u-container-layout u-similar-container u-valign-bottom-xl u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-1">
+              <img class="u-expanded-width u-image u-image-round u-radius u-image-1"
+                src="{% static 'metasouk/images/41fe8a9692ba88031bba4f3868459672.jpg' %}" alt="" data-image-width="736"
+                data-image-height="1202">
+              <div
+                class="u-container-align-center-sm u-container-align-center-xs u-container-style u-expanded-width u-gradient u-group u-hover-feature u-radius u-shape-round u-group-1"
+                data-href="{% url 'products' %}?categorie=artistique" data-page-id="531325105" title="Boutique">
+                <div class="u-container-layout u-valign-middle u-container-layout-2">
+                  <h6 class="u-align-center u-hover-feature u-text u-text-default u-text-3">NFT ARTISTIQUE</h6>
+                  <p class="u-align-center u-custom-font u-font-arial u-hover-feature u-text u-text-default u-text-4">
+                    Click and explore your choices</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div
+              class="u-container-layout u-similar-container u-valign-bottom-xl u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-3">
+              <img class="u-expanded-width u-image u-image-round u-radius u-image-2"
+                src="{% static 'metasouk/images/c6baa39a4469a738bed75bcc8881283c.jpg' %}" alt="" data-image-width="673"
+                data-image-height="1200">
+              <div
+                class="u-container-align-center u-container-style u-expanded-width u-gradient u-group u-hover-feature u-radius u-shape-round u-group-2"
+                data-href="{% url 'products' %}?categorie=musicale" data-page-id="531325105" title="Boutique">
+                <div class="u-container-layout u-valign-middle u-container-layout-4">
+                  <h6 class="u-align-center u-hover-feature u-text u-text-default u-text-5"> NFT MUSICALE</h6>
+                  <p class="u-align-center u-custom-font u-font-arial u-hover-feature u-text u-text-default u-text-6">
+                    Click and explore your choices</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item">
+            <div
+              class="u-container-layout u-similar-container u-valign-bottom-xl u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5">
+              <img class="u-expanded-width u-image u-image-round u-radius u-image-3"
+                src="{% static 'metasouk/images/photo_5809977663924850113_y.jpg' %}" alt="" data-image-width="735"
+                data-image-height="976">
+              <div
+                class="u-container-style u-expanded-width u-gradient u-group u-hover-feature u-radius u-shape-round u-group-3"
+                data-href="{% url 'products' %}?categorie=gaming" data-page-id="531325105" title="Boutique">
+                <div class="u-container-layout u-valign-middle u-container-layout-6">
+                  <h6 class="u-align-center u-hover-feature u-text u-text-default u-text-7">NFT GAMMING</h6>
+                  <p class="u-align-center u-custom-font u-hover-feature u-text u-text-default u-text-8"> Click and
+                    explore your choices</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section class="u-clearfix u-palette-1-dark-3 u-section-6" id="sec-590e">
+    <div class="u-clearfix u-sheet u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-sheet-1">
+      <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-1"
+        src="{% static 'metasouk/images/SK__1_-removebg-preview.png' %}" alt="" data-image-width="500"
+        data-image-height="500" data-animation-name="customAnimationIn" data-animation-duration="1000"
+        data-animation-delay="0">
+      <div class="custom-expanded u-align-right u-form u-form-1">
+        <form action="{% url 'index' %}" id="myForm" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
+          source="email" name="form" style="padding: 10px;" method="POST">
+          {% csrf_token %}
+          <div class="u-form-group u-form-name u-label-top">
+            <label for="name-96d4" class="u-label u-label-1">Name</label>
+            <input type="text" placeholder="Enter your name" id="name-96d4" name="name"
+              class="u-border-2 u-border-custom-color-3 u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-radius u-input-1"
+              required="">
+          </div>
+          <div class="u-form-email u-form-group u-label-top">
+            <label for="email-96d4" class="u-label u-label-2">Email</label>
+            <input type="email" placeholder="Enter a valid email address" id="email-96d4" name="email"
+              class="u-border-2 u-border-custom-color-3 u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-radius u-input-2"
+              required="">
+          </div>
+          <div class="u-form-group u-form-message u-label-top">
+            <label for="message-96d4" class="u-label u-label-3">Message</label>
+            <textarea placeholder="Enter your message" rows="4" cols="50" id="message-96d4" name="message"
+              class="u-border-2 u-border-custom-color-3 u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-radius u-input-3"
+              required=""></textarea>
+          </div>
+          <div class="u-align-left u-form-group u-form-submit u-label-top">
+            <input type="submit" value="submit" class="u-form-control-hidden">
+            <button type="submit"
+              class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-3 u-radius u-btn-1">
+              Submit
+            </button>
+          </div>
+        </form>
+        {% if success %}
+        <script>
+          // Affiche l'alerte quand la page est chargée après le POST réussi
+          alert('Votre message a été envoyé avec succès !');
+          // Vide le formulaire
+          document.getElementById('myForm').reset();
+        </script>
+        {% endif %}
+      </div>
+      <h3 class="u-text u-text-default u-text-1" data-animation-name="jackInTheBox" data-animation-duration="1000"
+        data-animation-delay="0" data-animation-direction="">Contact us</h3>
+      <h3 class="u-text u-text-2" data-animation-name="pulse" data-animation-duration="1000" data-animation-delay="0"
+        data-animation-direction=""> Creating scalable digital experiences is our expertise. Tell us about your needs —
+        we’d be delighted to collaborate with you</h3>
+      <div
+        class="u-border-3 u-border-custom-color-3 u-expanded-width u-line u-line-horizontal u-opacity u-opacity-35 u-line-1">
+      </div>
+    </div>
+  </section>
+
+  {% include "metasouk/includes/footer.html" %}
+
+  <!-- JavaScript -->
+  <script>
+    document.getElementById("chatbot").addEventListener("click", function () {
+      const chatbotContainer = document.getElementById("sidebarch");
+      chatbotContainer.style.display = chatbotContainer.style.display === "none" || chatbotContainer.style.display === "" ? "flex" : "none";
+    });
+
+    document.getElementById("envcht").addEventListener("click", function () {
+      const userInput = document.getElementById("userInput").value;
+      if (userInput.trim() !== "") {
+        sendQuestion(userInput);
+      }
+    });
+
+    function sendQuestion(question) {
+      const chatLog = document.getElementById("chatLog");
+
+      const userMsg = document.createElement("div");
+      userMsg.className = "user";
+      userMsg.textContent = question;
+      chatLog.appendChild(userMsg);
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "bot";
+      botMsg.textContent = getBotResponse(question);
+      chatLog.appendChild(botMsg);
+
+      document.getElementById("userInput").value = "";
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // enlève les accents
+        .replace(/[’‘]/g, "'")           // uniformise les apostrophes
+        .trim();
+    }
+
+    function getBotResponse(question) {
+      const q = normalize(question);
+      switch (q) {
+        case "c’est quoi un nft ?":
+        case "c'est quoi un nft ?":
+          return "Un NFT (jeton non fongible) est un certificat numérique unique enregistré sur la blockchain, utilisé pour prouver la propriété d'un objet numérique comme une image, une musique ou une vidéo.";
+        case "comment acheter un nft ?":
+          return "Connectez-vous à votre compte, accédez au Store, choisissez un NFT et suivez les instructions de paiement.";
+        case "comment vendre un nft ?":
+          return "Vous devez être vendeur. Une fois accepté, vous pourrez mettre vos NFTs en vente depuis votre tableau de bord.";
+        case "un client peut-il devenir vendeur ?":
+          return "Oui, vous pouvez faire une demande dans votre espace personnel. Elle sera examinée par notre équipe.";
+        case "comment vérifier mon statut de vendeur ?":
+          return "Votre demande est examinée sous 3 jours. Un email vous sera envoyé avec la décision (acceptée ou refusée).";
+        case "quels types de nft vendez-vous ?":
+          return "Actuellement, nous proposons uniquement des NFT sous forme d'images dans différentes catégories.";
+        case "quelles sont les categories de nft disponibles ?":
+          return "Les images NFT sont classées en trois catégories : musicale, gaming et artistique. Consultez-les dans la <a href='/store' target='_blank'>page Store</a>.";
+        case "comment s’inscrire ?":
+        case "comment s'inscrire ?":
+          return "Cliquez sur le bouton 'S’inscrire' en haut de la page et remplissez le formulaire.";
+        case "comment se connecter ?":
+          return "Utilisez le bouton 'Connexion' en haut de la page pour accéder à votre compte.";
+        case "comment vous contacter ?":
+          return "Vous pouvez nous contacter via le formulaire en bas de page ou par email à support@nftmarket.com.";
+        default:
+          return "Merci pour votre question. Une réponse s'affichera ici prochainement.";
+      }
+    }
+
+  </script>
+</body>
+
+</html>

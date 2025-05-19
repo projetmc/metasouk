@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Formulaire de Paiement - NFTs</title>
+    <link rel="stylesheet" href="{% static 'metasouk/css/site.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'metasouk/css/paiement.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/jquery.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/site.js' %}" defer=""></script>
+</head>
+
+<body class="u-body u-xl-mode" data-lang="fr">
+    {% include "metasouk/includes/header.html" %}
+
+    <section class="u-align-center u-clearfix u-section-1" style=" background-color: #404040;" >
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="form-wrapper">
+                <h2>Formulaire de paiement</h2>
+                <form id="paymentForm" action="" method="post">
+                    {% csrf_token %}
+
+                    <label for="nom">Nom complet :</label>
+                    <input type="text" name="nom" id="nom" value="{{ nom_utilisateur }}" required readonly>
+
+                    <label for="email">Adresse email :</label>
+                    <input type="email" name="email" id="email" value="{{ email_utilisateur }}" required readonly>
+
+                    <label for="montant">Montant (€) :</label>
+                    <input type="number" name="montant" id="montant" value="{{ commande.montant_total }}" required
+                        readonly>
+
+                    <div class="payment-methods">
+                        <label><input type="radio" name="mode_paiement" value="paypal" checked> PayPal</label>
+                        <label><input type="radio" name="mode_paiement" value="carte"> Carte bancaire</label>
+                    </div>
+
+                    <div id="cardDetails" class="card-details">
+                        <label for="nom_carte">Nom sur la carte :</label>
+                        <input type="text" name="nom_carte" id="nom_carte" autocomplete="cc-name">
+
+                        <label for="numero_carte">Numéro de carte :</label>
+                        <input type="text" name="numero_carte" id="numero_carte" maxlength="16" inputmode="numeric"
+                            pattern="[0-9]*" autocomplete="cc-number">
+
+                        <label for="cvv">CVV :</label>
+                        <input type="text" name="cvv" id="cvv" maxlength="4" inputmode="numeric" pattern="[0-9]*"
+                            autocomplete="cc-csc">
+
+                        <label for="expiration">Date d'expiration :</label>
+                        <input type="month" name="expiration" id="expiration" autocomplete="cc-exp">
+                    </div>
+
+                    <button type="submit">Valider</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const radioPaypal = document.querySelector('input[value="paypal"]');
+        const radioCarte = document.querySelector('input[value="carte"]');
+        const cardDetails = document.getElementById('cardDetails');
+
+        document.querySelectorAll('input[name="mode_paiement"]').forEach((el) => {
+            el.addEventListener('change', () => {
+                if (radioCarte.checked) {
+                    cardDetails.style.display = 'block';
+                } else {
+                    cardDetails.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    {% include "metasouk/includes/footer.html" %}
+</body>
+
+</html>

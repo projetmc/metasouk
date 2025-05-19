@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="fr">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="Welcome Back !">
+  <meta name="description" content="">
+  <title>Panier</title>
+  <link rel="stylesheet" href="{% static 'metasouk/css/site.css' %}" media="screen">
+  <link rel="stylesheet" href="{% static 'metasouk/css/panier.css' %}" media="screen">
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/jquery.js' %}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/site.js' %}" defer=""></script>
+  <link rel="icon" href="images/favicon.png">
+
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata:400">
+</head>
+
+<body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="fr">
+  {% include "metasouk/includes/header.html" %}
+
+  <section class="u-clearfix u-grey-80 u-section-1" id="block-1" style="background-color: #404040;">
+    <div class="u-clearfix u-sheet u-valign-middle-lg u-sheet-1">
+      <h2 class="u-custom-font u-text u-text-default u-text-1" data-animation-name="flipIn"
+        data-animation-duration="1000" data-animation-delay="0" data-animation-direction="X">Cart</h2>
+      <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-1"
+        src="{% static 'metasouk/images/SK__1_-removebg-preview.png' %}" alt="" data-image-width="500"
+        data-image-height="500">
+
+      {% if articles %}
+      <table style="width:100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th style="border-bottom: 1px solid #ddd; padding: 8px;">Image</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 8px;">Nom</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 8px;">Catégorie</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 8px;">Prix ($)</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 8px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for article in articles %}
+          <tr>
+            <td style="padding: 8px; text-align: center;">
+              <img src="{{ article.produit.image.url }}" alt="{{ article.produit.nom }}"
+                style="max-width: 80px; max-height: 80px;">
+            </td>
+            <td style="padding: 8px; text-align: center;">{{ article.produit.nom }}</td>
+            <td style="padding: 8px; text-align: center;">{{ article.produit.categorie }}</td>
+            <td style="padding: 8px; text-align: center;">{{ article.produit.prix }}</td>
+            <td style="padding: 8px; text-align: center;">
+              <form method="post" action="{% url 'retirer_du_panier' article.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="background:none; border:none; color:#f1c50e; cursor:pointer; padding:0;">
+                  Remove
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" style="text-align: right; padding: 8px; font-weight: bold;">Total Price</td>
+            <td style="padding: 8px; font-weight: bold;">{{ total }} $</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+      {% else %}
+      <p>Your cart is empty.</p>
+      {% endif %}
+
+      <div style="margin-top: 20px; display: flex; gap: 15px;">
+        <!-- Bouton revenir ajouter des produits -->
+        <a href="{% url 'products' %}"
+          class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-hover-palette-4-base u-radius u-btn-9"
+          title="Add more products">
+          Add More Products
+        </a>
+
+        <!-- Bouton vers paiement -->
+        <form method="post" action="{% url 'creer_commande' %}">
+          {% csrf_token %}
+          <button type="submit"
+            class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-hover-palette-4-base u-radius u-btn-9"
+            title="Proceed to payment">
+            Proceed to Payment
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  {% include "metasouk/includes/footer.html" %}
+</body>
+
+</html>

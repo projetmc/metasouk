@@ -1,0 +1,555 @@
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-height: 500px) {
+    .modal-dialog {
+        max-height: 80vh;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    color: #000;
+}
+
+.modal-body form input,
+.modal-body form select,
+.modal-body form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.modal-body form button {
+    background-color: #f99c00;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-body form button:hover {
+    background-color: #e68a00;
+}
+
+
+h4 {
+    color: white;
+}
+
+body {
+    background-color: #404040;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-side {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.right-side-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.right-side {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.purchase-history table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.purchase-history th,
+.purchase-history td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.purchase-history th {
+    background-color: #f99c00;
+}
+
+.purchase-history td {
+    background-color: #fafafa;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-buttons .button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #f99c00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-buttons .button:hover {
+    background-color: #e68a00;
+}
+
+.separator {
+    border: none;
+    height: 3px;
+    background-color: #f99c00;
+    margin: 5px 0;
+    border-radius: 2px;
+}
+
+.button.back {
+    background-color: #404040;
+    color: white;
+}
+
+
+body {
+    background-color: #404040;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+#modifyBtn {
+    background-color: #f99c00;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px;
+}
+
+#modifyBtn:hover {
+    background-color: #e68900;
+}
+
+#modifSection {
+    display: none;
+    background-color: #333333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    transition: opacity 0.5s ease;
+}
+
+.card {
+    background-color: #444444;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h5 {
+    color: #f99c00;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    color: #f99c00;
+    font-weight: bold;
+}
+
+.form-control {
+    background-color: #555555;
+    color: #fff;
+    border: 1px solid #f99c00;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-control::placeholder {
+    color: #f4f4f4;
+}
+
+.form-control:focus {
+    border-color: #f99c00;
+    box-shadow: 0 0 5px #f99c00;
+}
+
+button[type="submit"] {
+    background-color: #f99c00;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #e68900;
+}
+
+.slide-section {
+    transition: opacity 0.5s ease;
+}
+
+#modifSection {
+    opacity: 0;
+}
+
+#modifSection.show {
+    opacity: 1;
+}
+
+/* Section de modification */
+.modif-section {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    color: white;
+}
+
+.modif-section h3 {
+    color: #f99c00;
+    margin-bottom: 20px;
+}
+
+.modif-section label {
+    display: block;
+    margin-bottom: 8px;
+    color: #f99c00;
+}
+
+.modif-section input[type="text"],
+.modif-section input[type="email"],
+.modif-section input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #f99c00;
+    border-radius: 4px;
+    background-color: #555555;
+    color: white;
+}
+
+.modif-section input::placeholder {
+    color: #f4f4f4;
+}
+
+.modif-section input:focus {
+    border-color: #f99c00;
+    box-shadow: 0 0 5px #f99c00;
+}
+
+.modif-section .button {
+    background-color: #f99c00;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.modif-section .button:hover {
+    background-color: #e68900;
+}
+
+select.form-control {
+    background-color: #555555;
+    color: #fff;
+    border: 1px solid #f99c00;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+select.form-control:focus {
+    border-color: #f99c00;
+    box-shadow: 0 0 5px #f99c00;
+}
+
+.left-side form input,
+.left-side form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.left-side form input:focus,
+.left-side form select:focus {
+    border-color: #f99c00;
+    outline: none;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #f99c00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #e68a00;
+}
+
+.button.back {
+    background-color: #404040;
+    color: white;
+}
+
+.separator {
+    border: none;
+    height: 3px;
+    background-color: #f99c00;
+    margin: 5px 0;
+    border-radius: 2px;
+}
+
+.icon-bar {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.icon-bar button,
+.product-action-bar button {
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: white;
+    border: 2px solid #f99c00;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.icon-bar button:hover,
+.product-action-bar button:hover {
+    background-color: #f99c00;
+    color: white;
+}
+
+.section {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+}
+
+th {
+    background-color: #f99c00;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+tr:hover {
+    background-color: #fce9cc;
+}
+
+.add-product-form input,
+.add-product-form select {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: white;
+}
+
+.add-product-form input:focus,
+.add-product-form select:focus {
+    border-color: #f99c00;
+    outline: none;
+}
+
+.actions button {
+    background-color: #404040;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.actions button:hover {
+    background-color: #e68a00;
+}
+
+.product-action-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+        border-right: none;
+        box-shadow: none;
+    }
+
+    .icon-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .product-action-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+
+    .actions button {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}
+
+/* Style commun pour les boutons de gestion */
+.section button {
+    background-color: #f99c00;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    margin: 8px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.section button:hover {
+    background-color: #d98400;
+}

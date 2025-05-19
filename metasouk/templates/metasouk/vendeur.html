@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="fr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>client</title>
+    <link rel="stylesheet" href="{% static 'metasouk/css/site.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'metasouk/css/client.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'metasouk/css/vendeur.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/jquery.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'metasouk/js/site.js' %}" defer=""></script>
+    <meta name="referrer" content="origin">
+    <link id="u-theme-google-font" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700|Alata:400">
+    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+
+</head>
+
+<body data-path-to-root="./" data-include-products="true" class="u-body u-xl-mode" data-lang="fr">
+    {% include "metasouk/includes/header.html" %}
+    <div class="container">
+        <div class="left-side">
+            <div class="product-action-bar">
+                <button onclick="toggleProductForm()">Add Product</button>
+                <button onclick="toggleProductDashboard()"> Dashboard</button>
+                <button onclick="toggleProductDashboard()">Sales History</button>
+                <a href="{% url 'client' %}"><button class="button back">← Back</button></a>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <!-- Gestion des produits -->
+            <div id="product-management" class="section">
+                <!-- Formulaire d'ajout de produit -->
+                <div id="product-form" style="display: none;" class="card">
+                    <h4>Add a Product</h4>
+                    <form class="add-product-form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="image" accept="image/*" required>
+                        <input type="text" name="nom" placeholder="Name" required>
+                        <input type="text" name="description" placeholder="Description" required>
+                        <input type="number" name="prix" placeholder="Price" required>
+                        <input type="text" name="type" placeholder="type" required>
+                        <select name="categorie" required>
+                            <option value="gaming">Gaming</option>
+                            <option value="musicale">Musicale</option>
+                            <option value="artistique">Artistique</option>
+                        </select>
+                        <select name="certification" required>
+                            <option value="">Certified</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <button type="submit" class="submit-button">Add</button>
+                    </form>
+                </div>
+
+                <!-- Tableau de produits -->
+                <div id="product-dashboard" style="display: none;" class="card">
+                    <h4>Product Dashboard</h4>
+                    <table class="styled-table">
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>categorie</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for produit in produits_en_vente %}
+                            <tr>
+                                <td>{{ produit.nom }}</td>
+                                <td>{{ produit.prix }} €</td>
+                                <td>{{ produit.categorie }}</td>
+                                <td>
+                                    {% if produit.image %}
+                                    <img src="{{ produit.image.url }}" alt="{{ produit.nom }}"
+                                        style="height: 80px; width: auto; border-radius: 5px;">
+                                    {% else %}
+                                    <span>No image</span>
+                                    {% endif %}
+                                </td>
+                                <td class="actions">
+                                    <button class="btn btn-warning btn-sm" type="submit"
+                                        onclick="remplirModalProduit({{ produit.id }}, '{{ produit.nom }}', '{{ produit.description }}', {{ produit.prix }}, '{{ produit.type }}', '{{ produit.categorie }}', '{{ produit.certification }}')">
+                                        Edit
+                                    </button>
+
+                                    <form action="{% url 'supprimer_produit' produit.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Modal for Editing Product -->
+            <div id="modaleModifierProduit" class="modal" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Product</h5>
+                            <button type="button" class="btn-close" onclick="closeModal()">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{% url 'modifier_produit' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" id="produitId" name="produit_id">
+
+                                <div class="mb-3">
+                                    <label for="imageProduit" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="imageProduit" name="image"
+                                        accept="image/*">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="nomProduit" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="nomProduit" name="nom" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="descriptionProduit" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="descriptionProduit" name="description"
+                                        required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="prixProduit" class="form-label">Price</label>
+                                    <input type="number" class="form-control" id="prixProduit" name="prix" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="typeProduit" class="form-label">Type</label>
+                                    <input type="text" class="form-control" id="typeProduit" name="type" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="categorieProduit" class="form-label">Catégorie</label>
+                                    <select class="form-select" id="categorieProduit" name="categorie" required>
+                                        <option value="gaming">Gaming</option>
+                                        <option value="musicale">Musicale</option>
+                                        <option value="artistique">Artistique</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="certificationProduit" class="form-label">Certification</label>
+                                    <select class="form-select" id="certificationProduit" name="certification" required>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produits vendus -->
+            <div class="section card">
+                <h4>Produits Vendus</h4>
+                <!-- Revenus totaux -->
+                <div class="total" style="font-weight: bold; margin-bottom: 10px;">
+                    Revenu total : {{ revenu_total }} €
+                </div>
+                {% if produits_vendus %}
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Prix de vente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for produit in produits_vendus %}
+                        <tr>
+                            <td><img src="{{ produit.image_url }}" alt="{{ produit.nom }}" width="50"></td>
+                            <td>{{ produit.nom }}</td>
+                            <td>{{ produit.prix }} €</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>Aucun produit vendu pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function toggleProductForm() {
+            const form = document.getElementById('product-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleProductDashboard() {
+            const dashboard = document.getElementById('product-dashboard');
+            dashboard.style.display = dashboard.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+    <script>
+        // Fonction pour afficher la modal
+        function openModal() {
+            const modal = document.getElementById('modaleModifierProduit');
+            modal.style.display = 'block';
+        }
+
+        // Fonction pour fermer la modal
+        function closeModal() {
+            const modal = document.getElementById('modaleModifierProduit');
+            modal.style.display = 'none';
+        }
+
+        // Fonction pour remplir la modal avec les données du produit à modifier
+        function remplirModalProduit(id, nom, description, prix, type, categorie, certification) {
+            document.getElementById('produitId').value = id;
+            document.getElementById('nomProduit').value = nom;
+            document.getElementById('descriptionProduit').value = description;
+            document.getElementById('prixProduit').value = prix;
+            document.getElementById('typeProduit').value = type;
+            document.getElementById('categorieProduit').value = categorie;
+            document.getElementById('certificationProduit').value = certification;
+
+            // Afficher la modal une fois qu'elle est remplie
+            openModal();
+        }
+
+        // Fermer la modal si l'utilisateur clique à l'extérieur de la modal
+        window.onclick = function (event) {
+            const modal = document.getElementById('modaleModifierProduit');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+    </script>
+
+    {% include "metasouk/includes/footer.html" %}
+</body>
+
+</html>
