@@ -1,0 +1,18 @@
+      "image_data": "",
+            "nom": "singe jaune",
+            "description": "singe jaune qui est fort dans le game",
+            "proprietaire": 4,
+            "prix": "650.00",
+            "categorie": "gaming",
+            "date_creation": "2025-05-10T08:41:17Z",
+            "type": "image",
+            "certification": "yes",
+            "est_vendu": true
+        }
+    },
+    {
+        "model": "metasouk.produitnft",
+        "pk": 9,
+        "fields": {
+            "image": "nft_images/f97c978cd40164d706841f94c9ee7646.jpg",
+      "image_data": "",
