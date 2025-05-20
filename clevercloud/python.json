@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "build-command": "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput",
+    "build-command": "pip install --no-cache-dir -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput",
     "start-command": "gunicorn nft.wsgi:application --bind 0.0.0.0:$PORT"
   }
 }
