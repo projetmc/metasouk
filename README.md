@@ -42,6 +42,12 @@ Mot de passe : admin123
 *Si la demande est acceptée :Le statut du client passe à vendeur et un email de confirmation est envoyé.
 *Si la demande est refusée : Un email explicatif est envoyé au client.
 
+-----Ajout d'un produit NFT 
+Lors de l’ajout d’un produit NFT, une image représentative peut être ajoutée. Les images sont alors stockées localement dans le dossier media/nft_images.
+Si aucune image n’est fournie, une image par défaut (nft_images/default.png) est utilisée.
+En parallèle, un champ image_data (ou image_blob) permet de stocker l’image en binaire dans la base de données. 
+Pour cela, une méthode personnalisée save convertit automatiquement l’image en données binaires lors de l’enregistrement, permettant ainsi de conserver l’image à la fois sur disque et en base.
+
 ----Déroulement du projet Django en local (si l’hébergement échoue)---
 Si l’hébergement de l’application Metasouk ne fonctionne pas, 
 voici les etapes afin de l'executer localement :
