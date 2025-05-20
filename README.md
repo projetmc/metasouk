@@ -57,12 +57,11 @@ Python 3.8
 django
 pip
 Git
-Virtualenv (optionnel mais recommandé)
-MySQL (ou le moteur de base de données que vous avez utilisé)
+MySQL (Wampserver)
 
 2.Cloner le projet: 
 git clone https://github.com/votre-utilisateur/metasouk.git
-cd metasouk
+cd nft
 
 3.Créer et activer un environnement virtuel: 
 python -m venv env
@@ -79,3 +78,7 @@ python manage.py migrate
 
 7.Lancer le serveur de développement : 
 python manage.py runserver
+
+Important :
+Assurez-vous de vous positionner dans le dossier racine du projet où se trouve le fichier manage.py avant d’exécuter les commandes ci-dessus.
+Ce fichier est essentiel pour lancer et gérer l’application Django.
